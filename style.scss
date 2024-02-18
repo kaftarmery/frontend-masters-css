@@ -1,9 +1,19 @@
-@import './styles/base.scss';
+@import "./styles/base.scss";
+
+// CSS VARIABLES (custom properties)
+// -- double dash is to tell CSS that this is a custom element
+// var(--my-variable, default-value)
+:root {
+  --primary-color: rgb(191, 191, 191);
+
+  --ball-duration: 2s;
+  --easing-default: cubic-bezier(0.5, 0, 0.5, 1);
+}
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   padding: 5vmin;
-  background-color: #f4f4f4;
+  background-color: var(--primary-color, rgb(193, 193, 255));
 }
 
 a {
@@ -23,9 +33,79 @@ ul {
   margin: 1rem 0;
 }
 
+// MAIN PAGE RED BALL
+
 .ball {
   height: 5vmin;
   width: 5vmin;
   border-radius: 50%;
-  background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
+  // background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
+
+  // Lecture work
+  // --ball-duration and --easing-default are our CSS variable written at the top
+  animation: slide-right var(--ball-duration) var(--easing-default) infinite;
+  background-color: red;
+
+  // CHOOSE what you want to "transition"
+  transition-property: background-color, transform; // but not the opacity
+
+  // apply all these stuff ONLY on the selected elements/properties
+  transition-duration: 2s;
+  transition-timing-function: linear;
 }
+
+.ball:hover {
+  transform: scale(10);
+  background-color: blue;
+  opacity: 0.2; // opacity will act immediately (no transition made)
+}
+
+// PINK SQUARE
+// we can select specific properties in the transition-property
+// and based on the position mentioned, we can set the durations, etc.
+
+.square {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(255, 0, 204);
+  margin-top: 30px;
+  border-radius: 5px;
+
+  transition-property: background-color, transform;
+  transition-duration: 0.5s, 1.5s, 1s;
+  transition-timing-function: linear, ease-in-out, ease-in-out;
+
+  transform: scale(180deg);
+}
+
+.square:hover {
+  transform: rotate(-180deg);
+  background-color: rgb(255, 255, 255);
+  color: black;
+  // opacity: 0.3;
+}
+
+// PURPLE SQUARE -- move transition to other states
+.otherSquare {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(66, 26, 152);
+  margin-top: 30px;
+  border-radius: 5px;
+
+  transition-property: background-color, transform;
+  transition-timing-function: linear, ease-in-out, ease-in-out;
+}
+
+// PUTTIN transition in the :hover state. They will be "activated" only when we are in this state: hovering. See how it immediately changes back to normal state (.squareOther) when we remove our cursor
+.otherSquare:hover {
+  color: black;
+  transform: rotate(-180deg);
+  transform: scale(180deg);
+  background-color: rgb(255, 255, 255);
+  opacity: 0.3;
+
+  transition-duration: 2s;
+}
+
+// TRANSITION ALL is just a matter of not being specific and a matter of what we want to animate/transition and what not. That's it. Ohterwise it can be used as a shorthand

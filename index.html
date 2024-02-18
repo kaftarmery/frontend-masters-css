@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -28,6 +28,14 @@
         <li><a href="/examples/inflight/">Inflight Example</a></li>
       </ul>
       <div class="ball"></div>
+
+      <div class="square"></div>
+      <div class="otherSquare"></div>
     </div>
   </body>
+  <script>
+    document.body.addEventListener("click", () => {
+      document.body.style.setProperty("--primary-color", "green");
+    });
+  </script>
 </html>
