@@ -15,26 +15,21 @@ body {
   padding: 5vmin;
   background-color: var(--primary-color, rgb(193, 193, 255));
 }
-
 a {
   color: blue;
 }
-
 h1 {
   margin: 0;
 }
-
 small {
   text-transform: uppercase;
   font-weight: bold;
 }
-
 ul {
   margin: 1rem 0;
 }
 
-// MAIN PAGE RED BALL
-
+// red ball
 .ball {
   height: 5vmin;
   width: 5vmin;
@@ -109,3 +104,36 @@ ul {
 }
 
 // TRANSITION ALL is just a matter of not being specific and a matter of what we want to animate/transition and what not. That's it. Ohterwise it can be used as a shorthand
+
+// KEYFRAMES GREEN BALL
+
+.ball2 {
+  height: 5vmin;
+  margin-top: 10px;
+  width: 5vmin;
+  border-radius: 50%;
+  background-color: greenyellow;
+
+  animation: move-like-a-square;
+  animation-duration: 4s;
+}
+
+// keyframe animations are like a timeline and we are defining "mini states" along this timeline
+// 0% -- very beginning
+// 100% -- very end
+
+@keyframes move-like-a-square {
+  0% {
+    transform: none;
+  }
+
+  // this will happen at 1 second later after the animation started
+  25% {
+    opacity: 50%;
+    transform: translateY(20px);
+  }
+
+  100% {
+    transform: translateX(150px);
+  }
+}
