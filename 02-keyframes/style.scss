@@ -1,4 +1,4 @@
-@import '../styles/base.scss';
+@import "../styles/base.scss";
 
 :root {
   --color-gray: #8c97b7;
@@ -16,6 +16,27 @@ body {
   background-color: #f9fbff;
 }
 
+.ball {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background-color: red;
+
+  // the round ball pulsates, inifnitely
+  animation-name: pulse;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+// when we hover over the ball, the animation stops
+// but it can be a bit abrupt. We want to "pause" the animation rather than stop it completely and bring it back to its initial state
+
+.ball:hover {
+  // animation: none;
+  animation-play-state: paused;
+}
+
 .ui-form {
   background: #fff;
   box-shadow: 0 0.5rem 1rem #0003;
@@ -25,7 +46,11 @@ body {
   grid-template-columns: 1fr auto;
   grid-template-rows: 1fr;
   grid-column-gap: 1rem;
-  grid-template-areas: 'input button';
+  grid-template-areas: "input button";
+
+  animation-name: slide-up;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
 
   // Add an animation here
 
@@ -48,8 +73,15 @@ body {
   border-radius: 0.25rem;
   outline: none;
   transition: inherit;
+
+  &:invalid:not(:focus) {
+    animation: shake-me;
+    animation-duration: 0.2s;
+    animation-timing-function: linear;
+  }
 }
 
+// BUTTON
 .ui-button {
   grid-area: button;
   border: none;
@@ -62,6 +94,11 @@ body {
   transition: inherit;
 }
 
+// .ui-button:hover {
+//   animation: shake-me 0.1s alternate-reverse;
+//   animation-iteration-count: 4;
+// }
+
 [data-show]:not([data-active]) {
   display: none;
 }
@@ -70,10 +107,38 @@ body {
   overflow: hidden;
 }
 
-@keyframes slide-up {
-  // Add keyframes here
+// keyframes
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(2);
+  }
 }
 
-@keyframes shake {
-  // Add a shake animation here
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  // let's say we want the form to be full opacity by the time it reaches up. We'll add 50% in this case
+  50% {
+    opacity: 1;
+  }
+  100% {
+    // opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shake-me {
+  0% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(5px);
+  }
 }

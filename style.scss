@@ -114,8 +114,17 @@ ul {
   border-radius: 50%;
   background-color: greenyellow;
 
-  animation: move-like-a-square;
+  // we can have MULTIPLE animatiosn on an element
+  animation-name: move-like-a-square, change-color;
   animation-duration: 4s;
+
+  // ANIMATION-FILL-MODE
+  // basically keeps the last frame/state of the animation/keyframe stuck.
+
+  animation-fill-mode: forwards;
+
+  // animation direction
+  // normal, reverse, alternate etc.
 }
 
 // keyframe animations are like a timeline and we are defining "mini states" along this timeline
@@ -135,5 +144,14 @@ ul {
 
   100% {
     transform: translateX(150px);
+  }
+}
+
+@keyframes change-color {
+  from {
+    background-color: none;
+  }
+  to {
+    background-color: red;
   }
 }
